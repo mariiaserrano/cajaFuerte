@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import lombok.SneakyThrows;
+import model.Usuario;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +23,16 @@ public class PrincipalController implements Initializable {
 
     private AnchorPane pantallaRegistro;
     private RegistroController controller_registro;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    private Usuario usuario;
 
     @FXML
     private BorderPane pantallaPrincipal;
@@ -59,6 +70,7 @@ public class PrincipalController implements Initializable {
         pantallaPrincipal.setCenter(pantallaMensajes);
         controller_mensajes.rellenaCombo();
     }
+
     @SneakyThrows
     public void cargarRegistro() {
         if (pantallaRegistro == null) {

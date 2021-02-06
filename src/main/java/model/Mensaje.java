@@ -3,7 +3,7 @@ package model;
 import lombok.Data;
 
 @Data
-public class Cifrado {
+public class Mensaje {
 
     private String iv;
     private String salt;
@@ -11,4 +11,6 @@ public class Cifrado {
     private String mensaje;
     private String firma;
     private int iteraciones;
+    String emisor;
+    String receptor;
 }

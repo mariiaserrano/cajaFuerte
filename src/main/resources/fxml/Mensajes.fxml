@@ -15,7 +15,7 @@
                         <Label layoutX="13.0" layoutY="14.0" text="Mensajes" />
                         <Label layoutX="13.0" layoutY="223.0" text="Redacta mensaje" />
                         <TextArea fx:id="fxRedactoMensajeMio" layoutX="14.0" layoutY="240.0" prefHeight="121.0" prefWidth="381.0" />
-                        <Button layoutX="429.0" layoutY="250.0" mnemonicParsing="false" text="Enviar" />
+                        <Button layoutX="429.0" layoutY="250.0" mnemonicParsing="false" onAction="#enviaMensaje" text="Enviar" />
                         <Button layoutX="522.0" layoutY="211.0" mnemonicParsing="false" text="Cargar" />
                         <Button layoutX="522.0" layoutY="332.0" mnemonicParsing="false" onAction="#vuelveAtras" text="Atras" />
                      </children>

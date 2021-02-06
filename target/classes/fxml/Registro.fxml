@@ -16,8 +16,8 @@
       <Label layoutX="90.0" layoutY="221.0" text="Confirmar Contraseña" />
       <Button layoutX="189.0" layoutY="287.0" mnemonicParsing="false" onAction="#registrar" text="Registrarse" />
       <TextField fx:id="fxRegistroNombre" layoutX="226.0" layoutY="115.0" />
-      <TextField fx:id="fxRegistroPass" layoutX="226.0" layoutY="165.0" />
-      <TextField fx:id="fxRegistroPassDos" layoutX="226.0" layoutY="217.0" />
+      <PasswordField fx:id="fxRegistroPass" layoutX="226.0" layoutY="165.0" />
+      <PasswordField fx:id="fxRegistroPassDos" layoutX="226.0" layoutY="217.0" />
       <Button layoutX="340.0" layoutY="287.0" mnemonicParsing="false" onAction="#vuelveAtras" text="Atrás" />
    </children>
 </AnchorPane>

@@ -1,4 +1,4 @@
-package utils;
+package Cifrado;
 
 import io.vavr.control.Either;
 import lombok.SneakyThrows;
@@ -6,7 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import model.Usuario;
 import org.bouncycastle.jce.X509Principal;
 import org.bouncycastle.x509.X509V3CertificateGenerator;
-import org.checkerframework.checker.units.qual.C;
+import utils.Constantes;
 
 import java.io.FileOutputStream;
 import java.math.BigInteger;
@@ -40,7 +40,7 @@ public class Certificados {
                             cert1.setSerialNumber(BigInteger.valueOf(1));
                             //usuario
                             cert1.setSubjectDN(new X509Principal("CN=" + usuario.getNombre()));
-                            cert1.setIssuerDN(new X509Principal("CN=" + usuario.getNombre())); //same since it is self-signed
+                            cert1.setIssuerDN(new X509Principal("CN=" + usuario.getNombre()));
                             cert1.setPublicKey(publicKey);
                             cert1.setNotBefore(
                                     Date.from(LocalDate.now().plus(365, ChronoUnit.DAYS).atStartOfDay().toInstant(ZoneOffset.UTC)));
@@ -52,7 +52,7 @@ public class Certificados {
                             resultado.set(Either.right(cert));
                         } catch (Exception e) {
                             log.error(e.getMessage(), e);
-                            resultado.set(Either.left("USuario incorrecto"));
+                            resultado.set(Either.left(Constantes.USUARIO_NO_VALIDO));
                         }
                     })
                     .peekLeft(s -> {
@@ -61,7 +61,7 @@ public class Certificados {
 
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            resultado.set(Either.left("USuario incorrecto"));
+            resultado.set(Either.left(Constantes.USUARIO_NO_VALIDO));
         }
         return resultado.get();
 
@@ -79,8 +79,8 @@ public class Certificados {
                                     try {
                                         KeyStore ks = KeyStore.getInstance("PKCS12");
                                         ks.load(null, null);
-                                        ks.setCertificateEntry(usuario.getNombre() + "publica", X509Certificate);
-                                        ks.setKeyEntry(usuario.getNombre() + "privada", privateKey
+                                        ks.setCertificateEntry(usuario.getNombre() + Constantes.PUBLICA, X509Certificate);
+                                        ks.setKeyEntry(usuario.getNombre() + Constantes.PRIVADA, privateKey
                                                 , usuario.getContrasena().toCharArray(), new Certificate[]{X509Certificate});
                                         FileOutputStream fos = new FileOutputStream(usuario.getRutaKeyStore());
                                         ks.store(fos, "".toCharArray());
@@ -88,20 +88,20 @@ public class Certificados {
                                         resultado.set(Either.right(Constantes.U_SUARIOADD));
                                     } catch (Exception e) {
                                         log.error(e.getMessage(), e);
-                                        resultado.set(Either.left("usuario incorrecto"));
+                                        resultado.set(Either.left(Constantes.USUARIO_NO_VALIDO));
                                     }
                                 })
                                 .peekLeft(s -> {
-                                    resultado.set(Either.left("usuarioIncorrecto"));
+                                    resultado.set(Either.left(Constantes.USUARIO_NO_VALIDO));
                                 });
                     })
                     .peekLeft(s -> {
-                        resultado.set(Either.left("usuarioIncorrecto"));
+                        resultado.set(Either.left(Constantes.USUARIO_NO_VALIDO));
                     });
 
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            resultado.set(Either.left("usuario incorrecto"));
+            resultado.set(Either.left(Constantes.USUARIO_NO_VALIDO));
         }
 
 
